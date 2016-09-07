@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TriangleRouteMVC", "TriangleRouteMVC\TriangleRouteMVC.csproj", "{6C540D9F-2A1B-498A-84F1-F17B717EFD36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TriangleRouteMVC.Tests", "TriangleRouteMVC.Tests\TriangleRouteMVC.Tests.csproj", "{E0AFD6FA-54B9-4C1C-8919-14174985EAA8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C540D9F-2A1B-498A-84F1-F17B717EFD36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C540D9F-2A1B-498A-84F1-F17B717EFD36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C540D9F-2A1B-498A-84F1-F17B717EFD36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C540D9F-2A1B-498A-84F1-F17B717EFD36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0AFD6FA-54B9-4C1C-8919-14174985EAA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0AFD6FA-54B9-4C1C-8919-14174985EAA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0AFD6FA-54B9-4C1C-8919-14174985EAA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0AFD6FA-54B9-4C1C-8919-14174985EAA8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
