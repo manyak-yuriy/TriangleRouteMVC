@@ -2,6 +2,49 @@
     ViewBag.Title = "Home Page";
 }
 
+@Scripts.Render("~/bundles/jquery")
+
+<br/>
+<div>
+    <p>
+        <textarea id="data" name="data" rows="10" cols="30">
+            3
+            7 4
+            2 4 6
+            8 5 9 3
+        </textarea>
+    </p>
+</div>
+
+
+<p><a id="sub" class="btn btn-default" href="#">Submit</a></p>
+
+<script>
+    $(document).ready(
+        function()
+        {
+            $('#sub').click(function () {
+                        alert($('#data').val());
+                        $.ajax({
+                            url: "@Url.Action("GetResult", "Home")",
+                            data: "data=" + $('#data').val(),
+                            type: "POST"
+                        })
+                          .done(function (data) {
+                                if (console && console.log)
+                                {
+                                    alert(data.sum + "   " + data.dir);
+                                    //alert("Got response:");
+                                }
+                            });
+            })
+        }
+     )
+</script>
+
+<!--
+    
+
 <div class="jumbotron">
     <h1>ASP.NET</h1>
     <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
@@ -29,3 +72,5 @@
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
 </div>
+
+-->
