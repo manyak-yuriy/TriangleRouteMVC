@@ -1,0 +1,29 @@
+﻿body {
+    overflow: scroll;
+}
+
+.tab-content {
+    margin-top: 30px;
+}
+
+#text-data {
+    min-width: 100%;
+}
+
+.inp {
+    height: 30px;
+    width: 30px;
+    position: absolute;
+}
+
+#grid {
+   position: relative;
+   
+   display: block;
+   height: 200px;
+   margin: 10px;
+}
+
+.well {
+    /*margin-right: 15px;*/
+}

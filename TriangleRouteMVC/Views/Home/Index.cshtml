@@ -1,33 +1,97 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Home";
 }
 
 @Scripts.Render("~/bundles/jquery")
 
-<br/>
-<div>
-    <p>
-        <textarea id="data" name="data" rows="10" cols="30">
-            3
-            7 4
-            2 4 6
-            8 5 9 3
-        </textarea>
-    </p>
+<br>
+<br>
+
+<div class="panel panel-default .panel-primary">
+
+    <div class="panel-heading">
+        Create a map
+    </div>
+    <div class="panel-body">
+
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#text-tab">From text</a></li>
+            <li><a data-toggle="tab" href="#grid-tab">From grid</a></li>
+        </ul>
+
+        <div class="tab-content container">
+            <div id="text-tab" class="row tab-pane fade in active">
+                <div class="col-sm-6 well">
+                    <h4>Fill in the textbox</h4>
+                    <form>
+                        <div class="form-group">
+
+                            <textarea class="form-control" rows="10" id="text-data" title="Hint" data-toggle="popover" data-placement="top"
+                                      animation="true" data-trigger="hover" data-content="Input numbers pressing enter after each line. Each line should contain one number more than the previous.">
+                                3
+                                7 4
+                                2 4 6
+                                8 5 9 3
+                            </textarea>
+
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-6 well">
+                    <div class="form-group">
+                        <label for="sel">Select predefined map:</label>
+                        <select class="form-control" id="sel">
+                            <option>example.txt</option>
+                            <option>simple_triangle.txt</option>
+                            <option>triangle.txt</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <p><a id="sub" class="btn btn-primary" href="#">Create</a></p>
+            <div id="grid-tab" class="tab-pane fade in">
+                <h4>Fill in the grid</h4>
+                @Html.Partial("Grid")
+            </div>
+        </div>
+        <!--
+           <div class="alert alert-danger">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
+        </div> 
+        -->
+        
+
+    </div>
 </div>
 
+<br\></br\>
+<div class="panel panel-default .panel-primary">
 
-<p><a id="sub" class="btn btn-default" href="#">Submit</a></p>
+    <div class="panel-heading">
+        Result
+    </div>
+    <div class="panel-body">
+
+        <div id="render-container">
+
+        </div>
+
+    </div>
+</div>
+
 
 <script>
     $(document).ready(
         function()
         {
+            $('[data-toggle="popover"]').attr("delay",{show: 2000, hide: 300}).popover();
+
             $('#sub').click(function () {
-                        alert($('#data').val());
+                        alert($('#text-data').val());
                         $.ajax({
                             url: "@Url.Action("GetResult", "Home")",
-                            data: "data=" + $('#data').val(),
+                            data: "data=" + $('#text-data').val(),
                             type: "POST"
                         })
                           .done(function (data) {
@@ -40,37 +104,6 @@
             })
         }
      )
+
+
 </script>
-
-<!--
-    
-
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
-
--->

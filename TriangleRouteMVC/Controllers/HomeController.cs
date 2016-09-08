@@ -19,6 +19,7 @@ namespace TriangleRouteMVC.Controllers
 
             double sum;
             string path;
+
             Solver.proc(map, mapSize, inputLines, out sum, out path);
 
             return Json(new { sum = sum, dir = path }, JsonRequestBehavior.AllowGet);
