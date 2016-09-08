@@ -10,19 +10,34 @@ namespace TriangleRouteMVC.Controllers
     public class HomeController : Controller
     {
         [HttpPost]
+        public ActionResult GetFileCont(string filename)
+        {
+            string[] lines = System.IO.File.ReadAllLines(Server.MapPath(@"~\Content\" +filename));
+            return Content(String.Join("\n", lines));
+        }
+
+        [HttpPost]
         public JsonResult GetResult(string data)
         {
             int mapSize;
             string[] inputLines;
+            
+            try
+            {
+                double[][] map = Solver.getMap(data, out mapSize, out inputLines);
 
-            double[][] map = Solver.getMap(data, out mapSize, out inputLines);
+                double sum;
+                string path;
 
-            double sum;
-            string path;
+                Solver.proc(map, mapSize, inputLines, out sum, out path);
 
-            Solver.proc(map, mapSize, inputLines, out sum, out path);
-
-            return Json(new { sum = sum, dir = path }, JsonRequestBehavior.AllowGet);
+                return Json(new { sum = sum, dir = path }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json(new { errMsg = e.Message }, JsonRequestBehavior.AllowGet);
+            }
+            
         }
 
         public ActionResult Index()
@@ -69,7 +84,11 @@ namespace TriangleRouteMVC.Controllers
             double[][] accMap = new double[mapSize][];
 
             for (int i = 0; i < mapSize; i++)
+            {
                 accMap[i] = new double[i + 2];
+                accMap[i][0] = double.NegativeInfinity; 
+            }
+                
 
             for (int j = 0; j <= mapSize; j++)
                 accMap[mapSize - 1][j] = map[mapSize - 1][j];

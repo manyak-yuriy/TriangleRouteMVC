@@ -1,11 +1,17 @@
-﻿<div class="form-group">
-    <label for="email">Number of rows:</label>
-    <input name="map-size" type="number" min="1" max="100" value="5" autofocus>
+﻿<div class="well">
+    <div class="form-group">
+        <label for="map-size">Number of rows:</label>
+        <input name="map-size" type="number" min="1" max="100" value="5" autofocus>
+    </div>
+
+    <div class="form-group">
+        <label for="grid">Fill in the grid with numeric triangle:</label>
+        <div id="grid" class="panel panel-default">
+        </div>
+    </div>
 </div>
 
 
-<div id="grid" class="well">
-</div>
 
 <script>
     var realRowNum = 0;

@@ -7,26 +7,26 @@
 <br>
 <br>
 
-<div class="panel panel-default .panel-primary">
+<div class="panel panel-default">
 
     <div class="panel-heading">
-        Create a map
+        <h3><span class="glyphicon glyphicon-hand-right"></span> <strong>Create a map</strong> </h3>
     </div>
-    <div class="panel-body">
+    <div id="panel" class="panel-body">
 
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#text-tab">From text</a></li>
-            <li><a data-toggle="tab" href="#grid-tab">From grid</a></li>
+            <li animation="true" trigger="hover" data-toggle="tooltip" data-placement="bottom" title="Use this tab to understand the structure"><a data-toggle="tab" href="#grid-tab">From grid</a></li> 
         </ul>
 
         <div class="tab-content container">
             <div id="text-tab" class="row tab-pane fade in active">
-                <div class="col-sm-6 well">
-                    <h4>Fill in the textbox</h4>
+                <div class="col-sm-7 well">
                     <form>
                         <div class="form-group">
+                            <label for="text-data">Fill in the textbox with numeric triangle:</label>
 
-                            <textarea class="form-control" rows="10" id="text-data" title="Hint" data-toggle="popover" data-placement="top"
+                            <textarea autofocus class="form-control" rows="10" id="text-data" title="Hint" data-toggle="popover" data-placement="top"
                                       animation="true" data-trigger="hover" data-content="Input numbers pressing enter after each line. Each line should contain one number more than the previous.">
                                 3
                                 7 4
@@ -37,36 +37,33 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-sm-6 well">
-                    <div class="form-group">
-                        <label for="sel">Select predefined map:</label>
-                        <select class="form-control" id="sel">
-                            <option>example.txt</option>
-                            <option>simple_triangle.txt</option>
-                            <option>triangle.txt</option>
-                        </select>
-                    </div>
+                <div class="col-sm-4 well col-sm-offset-1">
+                    <form>
+                        <div class="form-group">
+                            @Html.AntiForgeryToken()
+                            <label for="filename">Select predefined map:</label>
+                            <select class="form-control" id="filename">
+                                <option>example.txt</option>
+                                <option>simple_triangle.txt</option>
+                                <option>triangle.txt</option>
+                            </select>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <p><a id="sub" class="btn btn-primary" href="#">Create</a></p>
+            
             <div id="grid-tab" class="tab-pane fade in">
-                <h4>Fill in the grid</h4>
                 @Html.Partial("Grid")
             </div>
+            <p><a id="sub" class="btn btn-primary" href="#sub">Create</a></p>
         </div>
-        <!--
-           <div class="alert alert-danger">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
-        </div> 
-        -->
-        
+                
 
     </div>
 </div>
 
 <br\></br\>
-<div class="panel panel-default .panel-primary">
+<div id="res" class="panel panel-default .panel-primary">
 
     <div class="panel-heading">
         Result
@@ -85,25 +82,67 @@
     $(document).ready(
         function()
         {
-            $('[data-toggle="popover"]').attr("delay",{show: 2000, hide: 300}).popover();
+            $('[data-toggle="popover"]').attr("delay", { show: 2000, hide: 300 }).popover();
+            $('[data-toggle="tooltip"]').tooltip();
 
+            // Send lines to server, get sum and path
             $('#sub').click(function () {
-                        alert($('#text-data').val());
+                        var data;
+                        if ($('#text-tab').hasClass('active'))
+                            data = $('#text-data').val();
+                        else
+                        {
+                            data = ""
+                            for (var i = 1; i <= realRowNum; i++)
+                            {
+                                for (var j = 1; j <= i; j++)
+                                {
+                                    var num = $('#grid').children().filter("[i='" + i + "']").filter("[j='" + j + "']").val()
+                                    if (num.length === 0 || !num.trim())
+                                        num = 0
+                                    data = data + num + " "
+                                }
+                                data = data + '\n'
+                            }
+                            alert(data)
+                        }
+
+                        //alert($('#text-data').val());
                         $.ajax({
                             url: "@Url.Action("GetResult", "Home")",
-                            data: "data=" + $('#text-data').val(),
+                            data: "data=" + data,
                             type: "POST"
                         })
                           .done(function (data) {
                                 if (console && console.log)
                                 {
-                                    alert(data.sum + "   " + data.dir);
-                                    //alert("Got response:");
+                                    if (data.errMsg)
+                                    {
+                                        $elem = $("<div class='alert alert-danger fade in'> <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a> <strong>Error!</strong> " + data.errMsg + " </div>")
+                                        $('#panel').append($elem);
+                                    }
+                                    else
+                                        alert(data.sum + "   " + data.dir);
                                 }
                             });
             })
-        }
-     )
+
+            // get file contents from server as a string
+            $('#filename').change(function () {
+                            $.ajax({
+                                url: "@Url.Action("GetFileCont", "Home")",
+                                data: "filename=" + $('#filename').val(),
+                                type: "POST"
+                            })
+                            .done(function (data) {
+                              if (console && console.log)
+                              {
+                                  $('#text-data').val(data);
+                                  //alert(data);
+                              }
+                            });
+            })
+        })
 
 
 </script>
