@@ -29,3 +29,14 @@
 .well {
     /*margin-right: 15px;*/
 }
+
+#render-container {
+    display: block;
+    overflow: auto;
+}
+
+canvas {
+    display: block;
+    overflow: auto;
+}
+

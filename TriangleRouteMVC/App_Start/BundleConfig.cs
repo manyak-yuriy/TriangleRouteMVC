@@ -7,7 +7,18 @@ namespace TriangleRouteMVC
     {
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
-        {
+        { 
+            bundles.Add(new ScriptBundle("~/bundles/hexiApp").Include(
+                        "~/Scripts/MyScripts/gameLoop.js",
+                        "~/Scripts/MyScripts/init.js",
+                        "~/Scripts/MyScripts/main.js",
+                        "~/Scripts/MyScripts/oldCode.js",
+                        "~/Scripts/MyScripts/initFunc/setup.js",
+                        "~/Scripts/MyScripts/lib/hexi.js",
+                        "~/Scripts/MyScripts/lib/hexi.min.js"
+                       )
+                       );
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 

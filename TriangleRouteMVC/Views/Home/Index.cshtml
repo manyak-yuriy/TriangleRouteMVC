@@ -4,6 +4,9 @@
 
 @Scripts.Render("~/bundles/jquery")
 
+
+
+
 <br>
 <br>
 
@@ -122,7 +125,10 @@
                                         $('#panel').append($elem);
                                     }
                                     else
-                                        alert(data.sum + "   " + data.dir);
+                                    {
+                                        alert(data.sum + "   " + data.dir + "   " + data.inpLines);
+                                    }
+                                        
                                 }
                             });
             })
@@ -145,4 +151,23 @@
         })
 
 
+    function buildResult()
+    {
+
+    }
+
+
 </script>
+
+
+<script src="/Myscripts/lib/hexi.js"></script>
+
+<!-- setup() is used in init.js -->
+<script src="/Myscripts/initFunc/setup.js"></script>
+
+
+<script src="/Myscripts/init.js"></script>
+
+
+
+

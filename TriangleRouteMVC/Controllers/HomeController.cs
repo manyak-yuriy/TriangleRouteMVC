@@ -12,7 +12,7 @@ namespace TriangleRouteMVC.Controllers
         [HttpPost]
         public ActionResult GetFileCont(string filename)
         {
-            string[] lines = System.IO.File.ReadAllLines(Server.MapPath(@"~\Content\" +filename));
+            string[] lines = System.IO.File.ReadAllLines(Server.MapPath(@"~\Content\" + filename));
             return Content(String.Join("\n", lines));
         }
 
@@ -31,7 +31,7 @@ namespace TriangleRouteMVC.Controllers
 
                 Solver.proc(map, mapSize, inputLines, out sum, out path);
 
-                return Json(new { sum = sum, dir = path }, JsonRequestBehavior.AllowGet);
+                return Json(new { sum = sum, dir = path, inpLines = inputLines }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
