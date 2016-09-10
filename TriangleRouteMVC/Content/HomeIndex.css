@@ -40,3 +40,9 @@ canvas {
     overflow: auto;
 }
 
+#sum-res {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-size: large;
+}
+

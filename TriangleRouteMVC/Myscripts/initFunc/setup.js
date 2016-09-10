@@ -1,17 +1,10 @@
 
-var
-    rowCnt = 25;
-    colCnt = 30;
-    boxH = 135;
-    boxW = 135;
 
-    cellH = 70;
-    cellW = 70;
 
 function setup() {
     //ghosts = g.frames("../sprites/ghosts/ghost.png", [[0, 0],[32, 0]], 32, 48);
 
-    terrain = initTerrain();
+    //terrain = initTerrain();
     
     //g.state = play;
 }
@@ -39,7 +32,7 @@ function initTerrain() {
             bubble.interact = true;
             bubble.fps = g.randomInt(8, 15);
 
-            bubble.playAnimation([3, 29]);
+            //bubble.playAnimation([3, 29]);
 
             setTimeout(function () {
                     

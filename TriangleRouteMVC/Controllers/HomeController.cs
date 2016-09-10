@@ -24,14 +24,15 @@ namespace TriangleRouteMVC.Controllers
             
             try
             {
-                double[][] map = Solver.getMap(data, out mapSize, out inputLines);
+                double max;
+                double[][] map = Solver.getMap(data, out mapSize, out inputLines, out max);
 
                 double sum;
                 string path;
 
                 Solver.proc(map, mapSize, inputLines, out sum, out path);
 
-                return Json(new { sum = sum, dir = path, inpLines = inputLines }, JsonRequestBehavior.AllowGet);
+                return Json(new { sum = sum, dir = path, inpLines = inputLines, max = max }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -53,13 +54,15 @@ namespace TriangleRouteMVC.Controllers
     class Solver
     {
         
-        static public double[][] getMap(string concatLines, out int mapSize, out string[] inputLines)
+        static public double[][] getMap(string concatLines, out int mapSize, out string[] inputLines, out double max)
         {
             concatLines = concatLines.Trim(' ', '\n');
             inputLines = concatLines.Split('\n');
 
             mapSize = inputLines.Length;
             double[][] map = new double[mapSize][];
+
+            max = double.NegativeInfinity;
 
             for (int i = 0; i < mapSize; i++)
             {
@@ -72,7 +75,12 @@ namespace TriangleRouteMVC.Controllers
                     throw new Exception(String.Format("Line #{0} must contain {1} elements", i + 1, i + 1));
 
                 for (int j = 1; j < i + 2; j++)
+                {
                     map[i][j] = double.Parse(lineElem[j - 1]);
+                    if (map[i][j] > max)
+                        max = map[i][j];
+                }
+                    
             }
             return map;
         }

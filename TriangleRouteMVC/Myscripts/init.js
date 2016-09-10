@@ -10,11 +10,10 @@ var
     $('#render-container').append($('canvas'))
 
 
-   /* $(window).resize(() => {
+   $(window).resize(() => {
         var wid = $('#render-container').width();
-        var widCan = 3000;
-        $('canvas').attr("width", Math.max(wid, widCan))
-    }) */
+        $('canvas').attr("width", wid)
+    }) 
     
 //Set the background color and scale the canvas
     //g.backgroundColor = "black";
