@@ -1,0 +1,55 @@
+﻿<div class="well">
+    <div class="form-group">
+        <label for="map-size">Number of rows:</label>
+        <input name="map-size" type="number" min="1" max="100" value="5" autofocus>
+    </div>
+
+    <div class="form-group">
+        <label for="grid">Fill in the grid with numeric triangle:</label>
+        <div id="grid" class="panel panel-default">
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    var realRowNum = 0;
+
+    function renderGrid(rowNum) {
+        
+        if (rowNum < realRowNum)
+            for (i = rowNum + 1; i <= realRowNum; i++)
+                $("input[i = " + i + "]").remove();
+        
+        for (i = realRowNum + 1; i <= rowNum; i++)
+        {
+            for (j = 1; j <= i; j++)
+            {
+                $('#grid').append($("<input type='text' class='inp'\>"));
+                $elem = $('#grid').children().last();
+                $elem.css("top", i * 32 + "px").css("left", j * 32 + "px");
+                $elem.attr("i", i);
+                $elem.attr("j", j);
+            } 
+
+        }
+        $('#grid').css("height", 60 + rowNum * 32)
+        realRowNum = rowNum;
+    }
+
+    $(function () {
+        var inp = $('input[name="map-size"]');
+        var rowNum = parseInt(inp.val());
+        renderGrid(rowNum);
+
+        inp.on("change", function () {
+            rowNum = parseInt(inp.val());
+            renderGrid(rowNum);
+        })
+
+    })
+  
+</script>
+
+

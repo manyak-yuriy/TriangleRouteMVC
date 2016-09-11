@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="D:\Archive\Git_managed\TriangleRouteMVC\TriangleRouteMVC\TriangleRouteMVC\obj\Debug\Package\PackageTmp" />
+  <setAcl path="D:\Archive\Git_managed\TriangleRouteMVC\TriangleRouteMVC\TriangleRouteMVC\obj\Debug\Package\PackageTmp" setAclResourceType="Directory" />
+  <setAcl path="D:\Archive\Git_managed\TriangleRouteMVC\TriangleRouteMVC\TriangleRouteMVC\obj\Debug\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
+</sitemanifest>
